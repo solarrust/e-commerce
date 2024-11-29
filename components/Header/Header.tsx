@@ -1,5 +1,29 @@
+import Link from "next/link";
 import React from "react";
+import styles from "./Header.module.css";
 
 export default function Header() {
-  return <div>Header</div>;
+  return (
+    <header className={styles.header}>
+      <nav>
+        <div className={styles.container}>
+          <Link href="/" className={styles.logo}>
+            E-commerce
+          </Link>
+          <ul className={styles.headerList}>
+            <li>
+              <Link href="/cart" className={styles.button}>
+                Cart
+              </Link>
+            </li>
+            <li>
+              <Link href="/signin" className={styles.button}>
+                Sign In
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  );
 }
