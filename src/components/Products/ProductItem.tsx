@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Product } from "../../lib/models/ProductModel";
+import { Product } from "@/lib/models/ProductModel";
 
 import styles from "./ProductItem.module.css";
 
