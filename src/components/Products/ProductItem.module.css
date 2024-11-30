@@ -1,0 +1,38 @@
+.productItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.productImageContainer {
+  border-radius: inherit;
+  background-color: #fff;
+}
+
+.productImage {
+  border-radius: inherit;
+  object-fit: contain;
+}
+
+.productInfo {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.productFooter {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.productPrice {
+  font-weight: 700;
+  font-size: 1.25rem;
+}

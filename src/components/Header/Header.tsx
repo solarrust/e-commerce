@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <nav>
-        <div className={styles.container}>
+        <div className="container">
           <Link href="/" className={styles.logo}>
             E-commerce
           </Link>

@@ -9,7 +9,7 @@ import styles from "./ProductItem.module.css";
 export default function ProductItem({ product }: { product: Product }) {
   return (
     <div className={styles.productItem}>
-      <figure>
+      <figure className={styles.productImageContainer}>
         <Link href={`/product/${product.slug}`}>
           <Image
             src={product.image}
@@ -17,20 +17,21 @@ export default function ProductItem({ product }: { product: Product }) {
             width={300}
             height={300}
             className={styles.productImage}
+            priority
           />
         </Link>
       </figure>
       <div className={styles.productInfo}>
         <Link href={`/product/${product.slug}`}>
           <h2>{product.name}</h2>
+          <p>{product.brand}</p>
         </Link>
-        <p>{product.brand}</p>
-        <div>
-          <span>${product.price}</span>
+        <footer className={styles.productFooter}>
+          <span className={styles.productPrice}>${product.price}</span>
           <span>
             {product.rating} Stars ({product.numReviews} Reviews)
           </span>
-        </div>
+        </footer>
       </div>
     </div>
   );
