@@ -2,6 +2,8 @@ import Image from "next/image";
 
 import { Product } from "@/lib/models/ProductModel";
 
+import AddToCart from "./AddToCart";
+
 import styles from "./ProductDetails.module.css";
 
 export default function ProductDetails({ product }: { product: Product }) {
@@ -28,14 +30,15 @@ export default function ProductDetails({ product }: { product: Product }) {
         </div>
         <p>
           <span className={styles.productRating}>
-            Rating: {product.rating} stars
-          </span>{" "}
-          <span>({product.numReviews} reviews)</span>
+            {product.rating} of {product.numReviews} reviews
+          </span>
         </p>
         <p className={styles.productDescription}>{product.description}</p>
 
         <footer className={styles.productFooter}>
-          <button className={styles.button}>Add to Cart</button>
+          {product.countInStock !== 0 && (
+            <AddToCart item={{ ...product, qty: 0, color: "", size: "" }} />
+          )}
         </footer>
       </div>
     </div>

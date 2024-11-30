@@ -1,5 +1,5 @@
 import ProductItem from "@/components/Products/ProductItem";
-import data from "@/lib/models/data";
+import data from "@/lib/data";
 import { Product } from "@/lib/models/ProductModel";
 
 export default function Home() {

@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
+import Menu from "./Menu";
+
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -11,18 +13,7 @@ export default function Header() {
           <Link href="/" className={`link`}>
             E-commerce
           </Link>
-          <ul className={styles.headerList}>
-            <li>
-              <Link href="/cart" className={styles.button}>
-                Cart
-              </Link>
-            </li>
-            <li>
-              <Link href="/signin" className={styles.button}>
-                Sign In
-              </Link>
-            </li>
-          </ul>
+          <Menu />
         </div>
       </nav>
     </header>

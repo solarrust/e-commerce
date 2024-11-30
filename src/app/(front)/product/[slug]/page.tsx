@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import ProductDetails from "@/components/Products/ProductDetails";
-import data from "@/lib/models/data";
+import data from "@/lib/data";
 
 export default async function ProductDetailsPage({
   params,
