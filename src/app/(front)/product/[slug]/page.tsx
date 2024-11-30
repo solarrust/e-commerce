@@ -6,7 +6,7 @@ import data from "@/lib/models/data";
 export default async function ProductDetailsPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const product = data.products.find((product) => product.slug === slug);
