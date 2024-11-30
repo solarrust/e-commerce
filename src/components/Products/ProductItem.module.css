@@ -1,7 +1,6 @@
 .productItem {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
   width: 100%;
   max-width: 300px;
@@ -34,5 +33,5 @@
 
 .productPrice {
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 2rem;
 }
