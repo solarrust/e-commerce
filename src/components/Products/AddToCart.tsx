@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 // import { useRouter } from "next/router";
 import useCartService from "@/lib/hooks/useCartStore";
 import { OrderItem } from "@/lib/models/OrderModel";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { Button } from "@mui/material";
+
+import styles from "./AddToCart.module.css";
 
 export default function AddToCart({ item }: { item: OrderItem }) {
   // const router = useRouter();
@@ -19,18 +24,31 @@ export default function AddToCart({ item }: { item: OrderItem }) {
   };
 
   return existItem ? (
-    <div>
-      <button type="button" onClick={() => decrease(existItem)}>
-        -
-      </button>
+    <div className={styles.quantity}>
+      <Button
+        aria-label="decrease"
+        variant="outlined"
+        onClick={() => decrease(existItem)}
+      >
+        <RemoveIcon fontSize="inherit" />
+      </Button>
       <span>{existItem.qty}</span>
-      <button type="button" onClick={() => increase(existItem)}>
-        +
-      </button>
+      <Button
+        aria-label="increase"
+        variant="outlined"
+        onClick={() => increase(existItem)}
+      >
+        <AddIcon fontSize="inherit" />
+      </Button>
     </div>
   ) : (
-    <button type="button" className="button" onClick={addToCartHandler}>
+    <Button
+      variant="contained"
+      onClick={addToCartHandler}
+      size="large"
+      sx={{ width: "100%" }}
+    >
       Add to Cart
-    </button>
+    </Button>
   );
 }

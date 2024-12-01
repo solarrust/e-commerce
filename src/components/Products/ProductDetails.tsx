@@ -1,6 +1,8 @@
 import Image from "next/image";
 
 import { Product } from "@/lib/models/ProductModel";
+import StarIcon from "@mui/icons-material/Star";
+import Rating from "@mui/material/Rating";
 
 import AddToCart from "./AddToCart";
 
@@ -28,11 +30,23 @@ export default function ProductDetails({ product }: { product: Product }) {
               : "Unavailable"}
           </span>
         </div>
-        <p>
-          <span className={styles.productRating}>
-            {product.rating} of {product.numReviews} reviews
-          </span>
+
+        <p className={styles.productRating}>
+          <Rating
+            name="read-only"
+            value={product.rating}
+            readOnly
+            precision={0.5}
+            emptyIcon={
+              <StarIcon
+                style={{ color: "rgb(184 184 184 / 0.4)" }}
+                fontSize="inherit"
+              />
+            }
+          />
+          <span>({product.numReviews} Reviews)</span>
         </p>
+
         <p className={styles.productDescription}>{product.description}</p>
 
         <footer className={styles.productFooter}>

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import useCartService from "@/lib/hooks/useCartStore";
+import { Badge } from "@mui/material";
 
 import styles from "./Header.module.css";
 
@@ -20,12 +21,16 @@ export default function Menu() {
     <div>
       <ul className={styles.headerList}>
         <li>
-          <Link href="/cart" className={styles.button}>
-            Cart{" "}
-            {mounted && items.length != 0 && (
-              <span>{items.reduce((a, c) => a + c.qty, 0)}</span>
-            )}
-          </Link>
+          {mounted && (
+            <Badge
+              badgeContent={items.reduce((a, c) => a + c.qty, 0)}
+              color="primary"
+            >
+              <Link href="/cart" className={styles.button}>
+                Cart
+              </Link>
+            </Badge>
+          )}
         </li>
         <li>
           <Link href="/signin" className={styles.button}>

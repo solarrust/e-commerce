@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Product } from "@/lib/models/ProductModel";
+import StarIcon from "@mui/icons-material/Star";
+import { Rating } from "@mui/material";
 
 import styles from "./ProductItem.module.css";
 
@@ -28,9 +30,19 @@ export default function ProductItem({ product }: { product: Product }) {
         </Link>
         <footer className={styles.productFooter}>
           <span className={styles.productPrice}>${product.price}</span>
-          <span>
-            {product.rating} Stars ({product.numReviews} Reviews)
-          </span>
+          <Rating
+            name="read-only"
+            value={product.rating}
+            readOnly
+            precision={0.5}
+            emptyIcon={
+              <StarIcon
+                style={{ color: "rgb(184 184 184 / 0.4)" }}
+                fontSize="inherit"
+              />
+            }
+          />
+          <span>({product.numReviews} Reviews)</span>
         </footer>
       </div>
     </div>
