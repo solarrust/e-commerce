@@ -12,7 +12,8 @@ const data = {
       name: "John Doe",
       email: "test@gmail.com",
       password: bcrypt.hashSync("123456"),
-      isAdmin: false,}
+      isAdmin: false,
+    },
   ],
   products: [
     {
@@ -44,6 +45,7 @@ const data = {
       countInStock: 3,
       colors: ["Black", "White", "Blue"],
       sizes: ["US 7", "US 8", "US 9", "US 10"],
+      isFeatured: true,
     },
     {
       name: "Vans Old Skool",
@@ -74,6 +76,7 @@ const data = {
       countInStock: 3,
       colors: ["Black", "White", "Red"],
       sizes: ["US 7", "US 8", "US 9", "US 10"],
+      isFeatured: true,
     },
     {
       name: "New Balance 574",
@@ -94,7 +97,7 @@ const data = {
       name: "Puma Suede Classic",
       slug: "puma-suede-classic",
       image: "/images/puma-suede-classic.jpg",
-      banner: "/images/puma-suede-classic-banner.jpg",
+      banner: "/images/puma-suede-classic-banner.png",
       price: 70,
       brand: "Puma",
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -104,6 +107,7 @@ const data = {
       countInStock: 3,
       colors: ["Black", "White", "Green"],
       sizes: ["US 7", "US 8", "US 9", "US 10"],
+      isFeatured: true,
     },
   ],
 };

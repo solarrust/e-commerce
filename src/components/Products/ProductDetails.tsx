@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Product } from "@/lib/models/ProductModel";
+import { convertDocToObj } from "@/lib/utils";
 import StarIcon from "@mui/icons-material/Star";
 import Rating from "@mui/material/Rating";
 
@@ -51,7 +52,14 @@ export default function ProductDetails({ product }: { product: Product }) {
 
         <footer className={styles.productFooter}>
           {product.countInStock !== 0 && (
-            <AddToCart item={{ ...product, qty: 0, color: "", size: "" }} />
+            <AddToCart
+              item={{
+                ...convertDocToObj(product),
+                qty: 0,
+                color: "",
+                size: "",
+              }}
+            />
           )}
         </footer>
       </div>
