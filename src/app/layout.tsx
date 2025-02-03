@@ -7,6 +7,7 @@ import Provider from "@/components/Provider";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import theme from "../theme";
 
@@ -44,6 +45,7 @@ export default function RootLayout({
             </Provider>
           </ThemeProvider>
         </AppRouterCacheProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
