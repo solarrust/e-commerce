@@ -67,12 +67,9 @@ const RegisterForm = () => {
         const data = await response.json();
         throw new Error(data.message);
       }
-    } catch (err: unknown) {
-      const error =
-        err instanceof Error && err.message.indexOf("E11000") === 0
-          ? "Email already exists"
-          : err instanceof Error ? err.message : "An error occurred";
-      toast.error(error);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "An error occurred";
+      toast.error(errorMessage);
     }
   };
 
