@@ -1,5 +1,6 @@
-import { NextRequest } from "next/server";
-import NextAuth, { Session } from "next-auth";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
