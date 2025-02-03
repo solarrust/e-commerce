@@ -1,16 +1,16 @@
-.signIn {
+.register {
   width: clamp(300px, 50%, 500px);
   margin-inline: auto;
 }
 
-.signInTitle {
+.registerTitle {
   text-align: center;
 }
 
-.signInForm {
+.registerForm {
   display: grid;
   gap: 1rem;
-  margin-block: 1rem 2rem;
+  margin-block: 2rem;
 }
 
 .formGroup {
@@ -22,7 +22,7 @@
   color: #d50000;
 }
 
-.signInFooter {
+.registerFooter {
   display: grid;
   place-items: center;
 }

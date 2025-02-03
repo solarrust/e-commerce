@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import Form from "@/components/SignIn/SignInForm";
+import SignInForm from "@/components/SignIn/SignInForm";
 
 export const metadata: Metadata = {
   title: "Sign In",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default async function Signin() {
-  return <Form />;
+  return <SignInForm />;
 }

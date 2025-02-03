@@ -2,6 +2,8 @@ import { SessionProvider } from "next-auth/react";
 
 import { auth } from "@/lib/auth";
 
+import ClientProviders from "./ClientProviders";
+
 export default async function Provider({
   children,
 }: {
@@ -9,5 +11,9 @@ export default async function Provider({
 }) {
   const session = await auth();
 
-  return <SessionProvider session={session}>{children}</SessionProvider>;
+  return (
+    <SessionProvider session={session}>
+      <ClientProviders>{children}</ClientProviders>
+    </SessionProvider>
+  );
 }

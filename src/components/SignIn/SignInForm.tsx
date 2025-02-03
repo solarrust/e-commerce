@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
@@ -17,7 +18,7 @@ type Inputs = {
   password: string;
 };
 
-const Form = () => {
+const SignInForm = () => {
   const { data: session } = useSession();
   const params = useSearchParams();
   const callbackUrl = params.get("callbackUrl") || "/";
@@ -51,6 +52,17 @@ const Form = () => {
   return (
     <div className={styles.signIn}>
       <h1 className={styles.signInTitle}>Sign In</h1>
+
+      {params.get("error") && (
+        <Alert severity="error">
+          {params.get("error") === "CredentialsSignin"
+            ? "Invalid email or password"
+            : params.get("error")}
+        </Alert>
+      )}
+      {params.get("success") && (
+        <Alert severity="success">{params.get("success")}</Alert>
+      )}
       <form
         onSubmit={handleSubmit(formSubmit)}
         className={styles.signInForm}
@@ -72,7 +84,9 @@ const Form = () => {
               },
             })}
           />
-          {errors.email?.message && <p>{errors.email.message}</p>}
+          {errors.email?.message && (
+            <p className={styles.formError}>{errors.email.message}</p>
+          )}
         </div>
         <div className={styles.formGroup}>
           <TextField
@@ -85,18 +99,10 @@ const Form = () => {
             placeholder="Password"
             {...register("password", { required: "Password is required" })}
           />
-          {errors.password?.message && <p>{errors.password.message}</p>}
+          {errors.password?.message && (
+            <p className={styles.formError}>{errors.password.message}</p>
+          )}
         </div>
-        {params.get("error") && (
-          <Alert severity="error">
-            {params.get("error") === "CredentialsSignin"
-              ? "Invalid email or password"
-              : params.get("error")}
-          </Alert>
-        )}
-        {params.get("success") && (
-          <Alert severity="success">Sign up successful</Alert>
-        )}
         <Button
           variant="contained"
           loading={isSubmitting}
@@ -107,8 +113,17 @@ const Form = () => {
           {isSubmitting ? "Signing in..." : "Sign In"}
         </Button>
       </form>
+      <div className={styles.signInFooter}>
+        Need an account?{" "}
+        <Link
+          href={`/register?callbackUrl=${callbackUrl}`}
+          className="link"
+        >
+          Register
+        </Link>
+      </div>
     </div>
   );
 };
 
-export default Form;
+export default SignInForm;

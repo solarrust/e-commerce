@@ -3,7 +3,7 @@ import { Roboto } from "next/font/google";
 
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
-import Provider from "@/components/Provider";
+import Provider from "@/components/Providers";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
