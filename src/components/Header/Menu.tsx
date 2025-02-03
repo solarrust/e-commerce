@@ -78,13 +78,13 @@ export default function Menu() {
             </MenuMUI>
           </li>
         ) : (
-          <Link
-            href="/signin"
+          <Button
+            variant="contained"
             className={styles.button}
             onClick={() => signIn()}
           >
             Sign In
-          </Link>
+          </Button>
         )}
       </ul>
     </div>
