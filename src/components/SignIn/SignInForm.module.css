@@ -1,0 +1,19 @@
+.signIn {
+  width: clamp(300px, 50%, 500px);
+  margin-inline: auto;
+}
+
+.signInTitle {
+  text-align: center;
+}
+
+.signInForm {
+  display: grid;
+  gap: 1rem;
+  margin-block-start: 2rem;
+}
+
+.formGroup {
+  display: flex;
+  gap: 1rem;
+}

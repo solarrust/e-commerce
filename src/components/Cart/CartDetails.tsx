@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-// import { useRouter } from "next/navigation";
 import useCartService from "@/lib/hooks/useCartStore";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -12,7 +12,7 @@ import { Button } from "@mui/material";
 import styles from "./CartDetails.module.css";
 
 export default function CartDetails() {
-  // const router = useRouter();
+  const router = useRouter();
   const { items, itemsPrice, decrease, increase } = useCartService();
 
   const [mounted, setMounted] = useState(false);
@@ -31,14 +31,20 @@ export default function CartDetails() {
           {items.length === 0 ? (
             <h3>
               Cart is Empty.{" "}
-              <Link href="/" className="link">
+              <Link
+                href="/"
+                className="link"
+              >
                 Go shopping →
               </Link>
             </h3>
           ) : (
             <ul className={styles.itemsList}>
               {items.map((item) => (
-                <li key={item.slug} className={styles.item}>
+                <li
+                  key={item.slug}
+                  className={styles.item}
+                >
                   <Link href={`/products/${item.slug}`}>
                     <Image
                       src={item.image}
@@ -76,6 +82,9 @@ export default function CartDetails() {
         </div>
         <div className="container">
           <p>Final ${itemsPrice}</p>
+          <button onClick={() => router.push("/signin")}>
+            Proceed to Checkout
+          </button>
         </div>
       </>
     )
