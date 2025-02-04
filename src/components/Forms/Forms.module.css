@@ -1,16 +1,16 @@
-.register {
+.formContainer {
   width: clamp(300px, 50%, 500px);
   margin-inline: auto;
 }
 
-.registerTitle {
+.formTitle {
   text-align: center;
 }
 
-.registerForm {
+.form {
   display: grid;
   gap: 1rem;
-  margin-block: 2rem;
+  margin-block: 1rem 2rem;
 }
 
 .formGroup {
@@ -22,7 +22,7 @@
   color: #d50000;
 }
 
-.registerFooter {
+.formFooter {
   display: grid;
   place-items: center;
 }

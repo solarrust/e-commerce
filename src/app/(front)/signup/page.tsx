@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 
-import RegisterForm from "@/components/Register/RegisterForm";
+import SignUpForm from "@/components/Forms/SignUpForm";
 
 export const metadata: Metadata = {
   title: "Register",
   description: "Create an account",
 };
 export default async function Register() {
-  return <RegisterForm />;
+  return <SignUpForm />;
 }

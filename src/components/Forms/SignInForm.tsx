@@ -11,7 +11,7 @@ import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-import styles from "./SignInForm.module.css";
+import styles from "./Forms.module.css";
 
 type Inputs = {
   email: string;
@@ -50,8 +50,8 @@ const SignInForm = () => {
   };
 
   return (
-    <div className={styles.signIn}>
-      <h1 className={styles.signInTitle}>Sign In</h1>
+    <div className={styles.formContainer}>
+      <h1 className={styles.formTitle}>Sign In</h1>
 
       {params.get("error") && (
         <Alert severity="error">
@@ -65,7 +65,7 @@ const SignInForm = () => {
       )}
       <form
         onSubmit={handleSubmit(formSubmit)}
-        className={styles.signInForm}
+        className={styles.form}
       >
         <div className={styles.formGroup}>
           <TextField
@@ -113,13 +113,13 @@ const SignInForm = () => {
           {isSubmitting ? "Signing in..." : "Sign In"}
         </Button>
       </form>
-      <div className={styles.signInFooter}>
+      <div className={styles.formFooter}>
         Need an account?{" "}
         <Link
-          href={`/register?callbackUrl=${callbackUrl}`}
+          href={`/signup?callbackUrl=${callbackUrl}`}
           className="link"
         >
-          Register
+          Sign Up
         </Link>
       </div>
     </div>

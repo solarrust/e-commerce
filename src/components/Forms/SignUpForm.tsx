@@ -12,7 +12,7 @@ import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-import styles from "./RegisterForm.module.css";
+import styles from "./Forms.module.css";
 
 type Inputs = {
   name: string;
@@ -21,7 +21,7 @@ type Inputs = {
   confirmPassword: string;
 };
 
-const RegisterForm = () => {
+const SignUpForm = () => {
   const { data: session } = useSession();
   const params = useSearchParams();
   const router = useRouter();
@@ -68,17 +68,18 @@ const RegisterForm = () => {
         throw new Error(data.message);
       }
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : "An error occurred";
+      const errorMessage =
+        error instanceof Error ? error.message : "An error occurred";
       toast.error(errorMessage);
     }
   };
 
   return (
-    <div className={styles.register}>
-      <h1 className={styles.registerTitle}>Register</h1>
+    <div className={styles.formContainer}>
+      <h1 className={styles.formTitle}>Sign Up</h1>
       <form
         onSubmit={handleSubmit(formSubmit)}
-        className={styles.registerForm}
+        className={styles.form}
       >
         <div className={styles.formGroup}>
           <TextField
@@ -171,20 +172,20 @@ const RegisterForm = () => {
           type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Registering..." : "Register"}
+          {isSubmitting ? "Signing up..." : "Sign up"}
         </Button>
       </form>
-      <div className={styles.registerFooter}>
+      <div className={styles.formFooter}>
         Already have an account?{" "}
         <Link
           href={`/signin?callbackUrl=${callbackUrl}`}
           className="link"
         >
-          Log In
+          Sign In
         </Link>
       </div>
     </div>
   );
 };
 
-export default RegisterForm;
+export default SignUpForm;
