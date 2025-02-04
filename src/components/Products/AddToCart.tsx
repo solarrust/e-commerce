@@ -5,14 +5,15 @@ import { useEffect, useState } from "react";
 import useCartService from "@/lib/hooks/useCartStore";
 import { OrderItem } from "@/lib/models/OrderModel";
 import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 
 import styles from "./AddToCart.module.css";
 
 export default function AddToCart({ item }: { item: OrderItem }) {
   // const router = useRouter();
-  const { items, increase, decrease } = useCartService();
+  const { items, increase, decrease, remove } = useCartService();
   const [existItem, setExistItem] = useState<OrderItem | undefined>();
 
   useEffect(() => {
@@ -25,28 +26,32 @@ export default function AddToCart({ item }: { item: OrderItem }) {
 
   return existItem ? (
     <div className={styles.quantity}>
-      <Button
+      <IconButton
         aria-label="decrease"
-        variant="outlined"
         onClick={() => decrease(existItem)}
       >
         <RemoveIcon fontSize="inherit" />
-      </Button>
+      </IconButton>
       <span>{existItem.qty}</span>
-      <Button
+      <IconButton
         aria-label="increase"
-        variant="outlined"
         onClick={() => increase(existItem)}
       >
         <AddIcon fontSize="inherit" />
-      </Button>
+      </IconButton>
+      <IconButton
+        aria-label="remove"
+        onClick={() => remove(existItem)}
+      >
+        <DeleteIcon fontSize="inherit" />
+      </IconButton>
     </div>
   ) : (
     <Button
       variant="contained"
       onClick={addToCartHandler}
       size="large"
-      sx={{ width: "100%" }}
+      fullWidth
     >
       Add to Cart
     </Button>

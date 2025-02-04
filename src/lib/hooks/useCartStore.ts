@@ -36,13 +36,16 @@ export default function useCartService() {
     totalPrice,
     increase: (item: OrderItem) => {
       const exist = items.find((i) => i.slug === item.slug);
+
       const updateCartItems = exist
         ? items.map((i) =>
             i.slug === item.slug ? { ...exist, qty: exist.qty + 1 } : i
           )
         : [...items, { ...item, qty: 1 }];
+
       const { itemsPrice, taxPrice, shippingPrice, totalPrice } =
         calcPrice(updateCartItems);
+
       cartStore.setState({
         items: updateCartItems,
         itemsPrice,
@@ -54,14 +57,34 @@ export default function useCartService() {
     decrease: (item: OrderItem) => {
       const exist = items.find((i) => i.slug === item.slug);
       if (!exist) return;
+
       const updateCartItems =
         exist.qty === 1
           ? items.filter((i) => i.slug !== exist.slug)
           : items.map((i) =>
               i.slug === item.slug ? { ...exist, qty: exist.qty - 1 } : i
             );
+
       const { itemsPrice, taxPrice, shippingPrice, totalPrice } =
         calcPrice(updateCartItems);
+
+      cartStore.setState({
+        items: updateCartItems,
+        itemsPrice,
+        taxPrice,
+        shippingPrice,
+        totalPrice,
+      });
+    },
+    remove: (item: OrderItem) => {
+      const exist = items.find((i) => i.slug === item.slug);
+      if (!exist) return;
+
+      const updateCartItems = items.filter((i) => i.slug !== exist.slug);
+
+      const { itemsPrice, taxPrice, shippingPrice, totalPrice } =
+        calcPrice(updateCartItems);
+
       cartStore.setState({
         items: updateCartItems,
         itemsPrice,

@@ -6,14 +6,15 @@ import { useRouter } from "next/navigation";
 
 import useCartService from "@/lib/hooks/useCartStore";
 import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 
 import styles from "./CartDetails.module.css";
 
 export default function CartDetails() {
   const router = useRouter();
-  const { items, itemsPrice, decrease, increase } = useCartService();
+  const { items, itemsPrice, decrease, increase, remove } = useCartService();
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -45,7 +46,7 @@ export default function CartDetails() {
                   key={item.slug}
                   className={styles.item}
                 >
-                  <Link href={`/products/${item.slug}`}>
+                  <Link href={`/product/${item.slug}`}>
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -55,25 +56,30 @@ export default function CartDetails() {
                     />
                   </Link>
                   <h3>
-                    <Link href={`/products/${item.slug}`}>{item.name}</Link>
+                    <Link href={`/product/${item.slug}`}>{item.name}</Link>
                   </h3>
                   <p>${item.price}</p>
                   <div className={styles.quantity}>
-                    <Button
+                    <IconButton
                       aria-label="decrease"
-                      variant="outlined"
                       onClick={() => decrease(item)}
                     >
                       <RemoveIcon fontSize="inherit" />
-                    </Button>
+                    </IconButton>
                     <span>{item.qty}</span>
-                    <Button
+                    <IconButton
                       aria-label="increase"
-                      variant="outlined"
                       onClick={() => increase(item)}
                     >
                       <AddIcon fontSize="inherit" />
-                    </Button>
+                    </IconButton>
+
+                    <IconButton
+                      aria-label="delete"
+                      onClick={() => remove(item)}
+                    >
+                      <DeleteIcon fontSize="inherit" />
+                    </IconButton>
                   </div>
                 </li>
               ))}
@@ -82,9 +88,12 @@ export default function CartDetails() {
         </div>
         <div className="container">
           <p>Final ${itemsPrice}</p>
-          <button onClick={() => router.push("/signin")}>
+          <Button
+            variant="outlined"
+            onClick={() => router.push("/signin")}
+          >
             Proceed to Checkout
-          </button>
+          </Button>
         </div>
       </>
     )
