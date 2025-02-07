@@ -1,3 +1,5 @@
+import { NextRequest } from "next/server";
+
 import { auth } from "@/lib/auth";
 import dbConnect from "@/lib/dbConnect";
 import OrderModel, { OrderItem } from "@/lib/models/OrderModel";
@@ -15,11 +17,13 @@ const calcPrices = (orderItems: OrderItem[]) => {
   return { itemsPrice, taxPrice, shippingPrice, totalPrice };
 };
 
-export const POST = auth(async (req) => {
-  if (!req.auth) {
+export async function POST(req: NextRequest) {
+  const session = await auth();
+
+  if (!session) {
     return Response.json({ message: "Not authorized" }, { status: 401 });
   }
-  const { user } = req.auth;
+  const user = session.user;
 
   if (!user) {
     return Response.json({ message: "No user found" }, { status: 401 });
@@ -68,4 +72,4 @@ export const POST = auth(async (req) => {
       { status: 500 }
     );
   }
-});
+}
