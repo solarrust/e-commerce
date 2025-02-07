@@ -90,7 +90,7 @@ export default function CartDetails() {
           <p>Final ${itemsPrice}</p>
           <Button
             variant="outlined"
-            onClick={() => router.push("/signin")}
+            onClick={() => router.push("/shipping")}
           >
             Proceed to Checkout
           </Button>

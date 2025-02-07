@@ -24,12 +24,13 @@ export default function PaymentForm() {
   };
 
   useEffect(() => {
-    if (!shippingAddress.address) {
+    if (!shippingAddress) {
       return router.push("/shipping");
     }
+
     setSelectedMethod(paymentMethod || "PayPal");
-  }, [paymentMethod, router, shippingAddress.address]);
-  
+  }, [paymentMethod, router, shippingAddress]);
+
   return (
     <>
       <CheckoutSteps current={2} />
@@ -59,7 +60,7 @@ export default function PaymentForm() {
           <div className={styles.formButtons}>
             <Button
               variant="outlined"
-              onClick={() => router.back()}
+              onClick={() => router.push("/shipping")}
               type="button"
               fullWidth
             >
