@@ -65,7 +65,7 @@ export default function PlaceOrderForm() {
     if (items.length === 0) {
       return router.push("/");
     }
-  }, [paymentMethod, router, items]);
+  }, [paymentMethod, router]);
 
   const [mounted, setMounted] = useState(false);
 
