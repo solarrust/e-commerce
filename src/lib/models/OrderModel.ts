@@ -32,6 +32,7 @@ const orderSchema = new mongoose.Schema(
     paymentResult: {
       id: String,
       status: String,
+      update_time: String,
       email_address: String,
     },
     itemsPrice: { type: Number, required: true },
@@ -48,7 +49,8 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-const orderModel = mongoose.models.Order || mongoose.model("Order", orderSchema);
+const orderModel =
+  mongoose.models.Order || mongoose.model("Order", orderSchema);
 
 export default orderModel;
 
@@ -78,7 +80,7 @@ export type Order = {
   paidAt?: Date;
   deliveredAt?: Date;
   createdAt: Date;
-}
+};
 
 export type OrderItem = {
   name: string;

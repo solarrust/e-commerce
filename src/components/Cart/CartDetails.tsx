@@ -86,15 +86,17 @@ export default function CartDetails() {
             </ul>
           )}
         </div>
-        <div className="container">
-          <p>Final ${itemsPrice}</p>
-          <Button
-            variant="outlined"
-            onClick={() => router.push("/shipping")}
-          >
-            Proceed to Checkout
-          </Button>
-        </div>
+        {items.length !== 0 && (
+          <div className="container">
+            <p>Final ${itemsPrice}</p>
+            <Button
+              variant="outlined"
+              onClick={() => router.push("/shipping")}
+            >
+              Proceed to Checkout
+            </Button>
+          </div>
+        )}
       </div>
     )
   );

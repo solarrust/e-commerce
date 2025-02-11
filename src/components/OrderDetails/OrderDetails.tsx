@@ -2,11 +2,13 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import toast from "react-hot-toast";
 // import { useSession } from "next-auth/react";
 import useSWR from "swr";
 
 import { OrderItem } from "@/lib/models/OrderModel";
 import Alert from "@mui/material/Alert";
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 export default function OrderDetails({
   orderId,
@@ -17,6 +19,29 @@ export default function OrderDetails({
 }) {
   // const { data: session } = useSession();
   const { data, error } = useSWR(`/api/orders/${orderId}`);
+
+  async function createPaypalOrder() {
+    const res = await fetch(`/api/orders/${orderId}/create-paypal-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const order = await res.json();
+    return order.id;
+  }
+
+  async function onApprovePaypalOrder(data: unknown) {
+    const res = await fetch(`/api/orders/${orderId}/capture-paypal-order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    await res.json();
+    toast.success("Order paid successfully");
+  }
 
   if (error) return error.message;
   if (!data) return "Loading...";
@@ -124,6 +149,14 @@ export default function OrderDetails({
           <strong>Total:</strong> ${totalPrice}
         </p>
       </div>
+      {!isPaid && paymentMethod === "PayPal" && (
+        <PayPalScriptProvider options={{ clientId: paypalClientId }}>
+          <PayPalButtons
+            createOrder={createPaypalOrder}
+            onApprove={onApprovePaypalOrder}
+          />
+        </PayPalScriptProvider>
+      )}
     </div>
   );
 }

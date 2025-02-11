@@ -1,15 +1,13 @@
-import { NextRequest } from "next/server";
-
 import { auth } from "@/lib/auth";
 import dbConnect from "@/lib/dbConnect";
 import OrderModel from "@/lib/models/OrderModel";
+import { paypal } from "@/lib/paypal";
 
-export async function GET(
-  request: NextRequest,
+export async function POST(
+  request: Request,
   { params }: { params: { id: string } }
 ) {
   const session = await auth();
-
   if (!session) {
     return Response.json({ message: "Not authorized" }, { status: 401 });
   }
@@ -21,5 +19,10 @@ export async function GET(
     return Response.json({ message: "Order not found" }, { status: 404 });
   }
 
-  return Response.json(order);
+  try {
+    const paypalOrder = await paypal.createOrder(order.totalPrice);
+    return Response.json(paypalOrder);
+  } catch (error: unknown) {
+    return Response.json({ message: (error as Error).message }, { status: 500 });
+  }
 }
