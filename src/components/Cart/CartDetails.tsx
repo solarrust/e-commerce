@@ -23,7 +23,7 @@ export default function CartDetails() {
 
   return (
     mounted && (
-      <>
+      <div className="wrapper">
         <div className="container">
           <h2 className="title">Shopping Cart</h2>
         </div>
@@ -95,7 +95,7 @@ export default function CartDetails() {
             Proceed to Checkout
           </Button>
         </div>
-      </>
+      </div>
     )
   );
 }

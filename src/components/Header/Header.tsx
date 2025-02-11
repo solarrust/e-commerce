@@ -9,8 +9,11 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <nav>
-        <div className="container">
-          <Link href="/" className={`link`}>
+        <div className="container wrapper">
+          <Link
+            href="/"
+            className={`link`}
+          >
             E-commerce
           </Link>
           <Menu />

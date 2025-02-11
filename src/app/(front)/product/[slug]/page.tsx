@@ -35,7 +35,7 @@ export default async function ProductDetailsPage({
     <>
       {product ? (
         <>
-          <div className="container">
+          <div className="container wrapper">
             <Link
               href="/"
               className="link"
@@ -43,7 +43,7 @@ export default async function ProductDetailsPage({
               ← Back to products
             </Link>
           </div>
-          <div className="container">
+          <div className="container wrapper">
             <ProductDetails product={product} />
           </div>
         </>

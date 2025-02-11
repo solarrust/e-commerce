@@ -35,7 +35,7 @@ export default async function Home() {
         options={OPTIONS}
       />
       <h2 className="title">Latest Products</h2>
-      <div className="container">
+      <div className="container wrapper">
         <div className="catalog">
           {!latestProducts.length && <p>No products found</p>}
           {latestProducts.map((product: Product) => (
