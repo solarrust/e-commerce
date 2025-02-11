@@ -121,6 +121,7 @@ export default function useCartService() {
     clearCart: () => {
       cartStore.setState({ items: [] });
     },
+    init: () => cartStore.setState(initialState),
   };
 }
 

@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -14,7 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import styles from "./Header.module.css";
 
 export default function Menu() {
-  const { items } = useCartService();
+  const { items, init } = useCartService();
   const [mounted, setMounted] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -31,6 +30,7 @@ export default function Menu() {
 
   const signoutHandler = () => {
     signOut({ callbackUrl: "/signin" });
+    init();
   };
 
   const { data: session } = useSession();
@@ -74,6 +74,9 @@ export default function Menu() {
                 "aria-labelledby": "fade-button",
               }}
             >
+              <MenuItem>
+                <Link href="/order-history">Order History</Link>
+              </MenuItem>
               <MenuItem onClick={signoutHandler}>Log Out</MenuItem>
             </MenuMUI>
           </li>

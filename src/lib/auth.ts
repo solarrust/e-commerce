@@ -73,10 +73,9 @@ export const config = {
 
       if (trigger === "update" && session) {
         token.user = {
-          _id: token.user?._id ?? "",
-          isAdmin: token.user?.isAdmin ?? false,
-          email: session.user?.email ?? "",
-          name: session.user?.name ?? "",
+          ...token.user,
+          email: session.user.email,
+          name: session.user.name,
         };
       }
 
