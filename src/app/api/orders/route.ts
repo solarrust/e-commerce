@@ -55,8 +55,6 @@ export async function POST(req: NextRequest) {
       totalPrice,
       shippingAddress: payload.shippingAddress,
       paymentMethod: payload.paymentMethod,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       user: user._id,
     });
 

@@ -9,7 +9,7 @@ export async function GET() {
     return Response.json({ message: "Not authorized" }, { status: 401 });
   }
 
-  const { user } = session as unknown as { user: { _id: string } };
+  const { user } = session;
   await dbConnect();
 
   if (!user) {
