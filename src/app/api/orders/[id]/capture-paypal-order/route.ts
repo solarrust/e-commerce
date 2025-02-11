@@ -3,10 +3,8 @@ import dbConnect from "@/lib/dbConnect";
 import OrderModel from "@/lib/models/OrderModel";
 import { paypal } from "@/lib/paypal";
 
-export async function POST(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function POST(request: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const session = await auth();
   if (!session) {
     return Response.json({ message: "Not authorized" }, { status: 401 });
