@@ -3,12 +3,11 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm, ValidationRule } from "react-hook-form";
 
+import CheckoutSteps from "@/components/Checkout/CheckoutSteps";
 import useCartService from "@/lib/hooks/useCartStore";
 import { ShippingAddress } from "@/lib/models/OrderModel";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-
-import CheckoutSteps from "../Checkout/CheckoutSteps";
 
 import styles from "./Forms.module.css";
 

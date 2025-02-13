@@ -1,6 +1,6 @@
 import React from "react";
 
-import ThemeToggler from "../ThemeToggler/ThemeToggler";
+import ThemeToggler from "@/components/ThemeToggler/ThemeToggler";
 
 import styles from "./Footer.module.css";
 

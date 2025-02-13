@@ -4,12 +4,11 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import useSWRMutation from "swr/mutation";
 
+import CheckoutSteps from "@/components/Checkout/CheckoutSteps";
 import useCartService from "@/lib/hooks/useCartStore";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import Link from "@mui/material/Link";
-
-import CheckoutSteps from "../Checkout/CheckoutSteps";
 
 import styles from "./Forms.module.css";
 
