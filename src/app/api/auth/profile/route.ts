@@ -1,21 +1,23 @@
+import { NextRequest } from "next/server";
 import bcrypt from "bcryptjs";
 
 import { auth } from "@/lib/auth";
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/lib/models/UserModel";
 
-export const PUT = auth(async (request) => {
-  if (!request.auth) {
-    return Response.json({ message: "Not authorized" }, { status: 401 });
+export async function PUT(request: NextRequest) {
+  const session = await auth();
+
+  if (!session || !session.user) {
+    return Response.json({ message: "Not authenticated" }, { status: 401 });
   }
 
-  const { user } = request.auth;
   const { name, email, password } = await request.json();
 
   await dbConnect();
-
   try {
-    const dbUser = await UserModel.findById(user._id);
+    const dbUser = await UserModel.findById(session.user._id);
+
     if (!dbUser) {
       return Response.json({ message: "User not found" }, { status: 404 });
     }
@@ -27,10 +29,10 @@ export const PUT = auth(async (request) => {
       : dbUser.password;
 
     await dbUser.save();
-    return Response.json({ message: "User updated" });
-  } catch (error: unknown) {
+    return Response.json({ message: "User has been updated" });
+  } catch (err: unknown) {
     const errorMessage =
-      error instanceof Error ? error.message : "An unknown error occurred";
+      err instanceof Error ? err.message : "An unknown error occurred";
     return Response.json({ message: errorMessage }, { status: 500 });
   }
-});
+}

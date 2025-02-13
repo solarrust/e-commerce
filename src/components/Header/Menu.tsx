@@ -77,6 +77,9 @@ export default function Menu() {
               <MenuItem>
                 <Link href="/order-history">Order History</Link>
               </MenuItem>
+              <MenuItem>
+                <Link href="/profile">Profile</Link>
+              </MenuItem>
               <MenuItem onClick={signoutHandler}>Log Out</MenuItem>
             </MenuMUI>
           </li>

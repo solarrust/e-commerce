@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
-import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/lib/models/UserModel";
+
+import dbConnect from "./dbConnect";
 
 export const config = {
   providers: [
@@ -14,14 +14,11 @@ export const config = {
         email: {
           type: "email",
         },
-        password: {
-          type: "password",
-        },
+        password: { type: "password" },
       },
       async authorize(credentials) {
         await dbConnect();
-
-        if (credentials === null) return null;
+        if (credentials == null) return null;
 
         const user = await UserModel.findOne({ email: credentials.email });
 
@@ -30,12 +27,10 @@ export const config = {
             credentials.password as string,
             user.password
           );
-
           if (isMatch) {
             return user;
           }
         }
-
         return null;
       },
     }),
@@ -46,31 +41,15 @@ export const config = {
     error: "/signin",
   },
   callbacks: {
-    authorized({ request, auth }: any) {
-      const protectedPaths = [
-        /\/shipping/,
-        /\/payment/,
-        /\/place-order/,
-        /\/profile/,
-        /\/order\/(.*)/,
-        /\/admin/,
-      ];
-
-      const { pathname } = request.nextUrl;
-
-      if (protectedPaths.some((path) => path.test(pathname))) return !!auth;
-      return true;
-    },
-    async jwt({ token, user, trigger, session }: any) {
+    async jwt({ user, trigger, session, token }: any) {
       if (user) {
         token.user = {
           _id: user._id,
-          name: user.name,
           email: user.email,
+          name: user.name,
           isAdmin: user.isAdmin,
         };
       }
-
       if (trigger === "update" && session) {
         token.user = {
           ...token.user,
@@ -78,17 +57,12 @@ export const config = {
           name: session.user.name,
         };
       }
-
       return token;
     },
-    async session({ session, token }: any) {
-      if (token && token.user) {
-        session.user = {
-          ...token.user,
-          name: token.user.name || "",
-        };
+    session: async ({ session, token }: any) => {
+      if (token) {
+        session.user = token.user;
       }
-
       return session;
     },
   },
