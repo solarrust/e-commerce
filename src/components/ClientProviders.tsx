@@ -42,7 +42,6 @@ export default function ClientProviders({
     >
       <Toaster
         position="top-right"
-        toastOptions={{ className: "toaster-con" }}
       />
       {children}
     </SWRConfig>

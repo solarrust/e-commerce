@@ -34,12 +34,14 @@ export default function ProfileForm() {
     handleSubmit,
     getValues,
     setValue,
-    formState: { errors, isSubmitting },
+    reset,
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<Inputs>({
     defaultValues: {
       name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
@@ -75,6 +77,12 @@ export default function ProfileForm() {
           },
         };
         await update(newSession);
+        reset(
+          { name, email, password: "", confirmPassword: "" },
+          {
+            keepDirty: false,
+          }
+        );
       } else {
         const data = await res.json();
         toast.error(data.message || "error");
@@ -170,7 +178,7 @@ export default function ProfileForm() {
               size="large"
               type="submit"
               fullWidth
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isDirty}
             >
               {isSubmitting ? "Updating..." : "Update"}
             </Button>
