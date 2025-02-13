@@ -2,12 +2,24 @@
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
-  cssVariables: true,
+  palette: {
+    mode: "dark",
+  },
+  colorSchemes: { light: true, dark: true },
+  cssVariables: {
+    colorSchemeSelector: "class",
+  },
   typography: {
     fontFamily: "var(--font-roboto)",
   },
-  palette: {
-    mode: "dark",
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          transition: "background-color 0.1s, color 0.1s",
+        },
+      },
+    },
   },
 });
 

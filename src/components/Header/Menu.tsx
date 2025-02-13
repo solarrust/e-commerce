@@ -5,7 +5,7 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import useCartService from "@/lib/hooks/useCartStore";
-import { Badge } from "@mui/material";
+import Badge from "@mui/material/Badge";
 import Button from "@mui/material/Button";
 import MenuMUI from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";

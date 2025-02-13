@@ -4,12 +4,11 @@ import { Roboto } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import Provider from "@/components/Providers";
+import theme from "@/theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-
-import theme from "../theme";
 
 import "./globals.css";
 
@@ -34,8 +33,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.variable}>
         <AppRouterCacheProvider options={{ key: "css" }}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
+          <ThemeProvider
+            theme={theme}
+            defaultMode="dark"
+          >
+            <CssBaseline enableColorScheme />
             <Provider>
               <div className="page">
                 <Header />
