@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import Provider from "@/components/Providers";
+import Sidebar from "@/components/Sidebar/Sidebar";
 import theme from "@/theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
@@ -39,6 +40,7 @@ export default function RootLayout({
           >
             <CssBaseline enableColorScheme />
             <Provider>
+              <Sidebar />
               <div className="page">
                 <Header />
                 {children}

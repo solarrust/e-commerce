@@ -70,14 +70,17 @@ export default function Menu() {
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
+              onClick={handleClose}
               MenuListProps={{
                 "aria-labelledby": "fade-button",
               }}
+              transformOrigin={{ horizontal: "right", vertical: "top" }}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              <MenuItem>
+              <MenuItem onClick={handleClose}>
                 <Link href="/order-history">Order History</Link>
               </MenuItem>
-              <MenuItem>
+              <MenuItem onClick={handleClose}>
                 <Link href="/profile">Profile</Link>
               </MenuItem>
               <MenuItem onClick={signoutHandler}>Log Out</MenuItem>

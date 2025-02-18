@@ -2,11 +2,11 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type Layout = {
-  theme: string;
+  drawerOpen?: boolean;
 };
 
 const initialState: Layout = {
-  theme: "system",
+  drawerOpen: false,
 };
 
 export const layoutStore = create<Layout>()(
@@ -16,12 +16,12 @@ export const layoutStore = create<Layout>()(
 );
 
 export default function useLayoutService() {
-  const { theme } = layoutStore();
+  const { drawerOpen } = layoutStore();
   return {
-    theme,
-    toggleTheme: () => {
+    drawerOpen,
+    toggleDrawer: () => {
       layoutStore.setState({
-        theme: theme === "dark" ? "light" : "dark",
+        drawerOpen: !drawerOpen,
       });
     },
   };
