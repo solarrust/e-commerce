@@ -77,6 +77,11 @@ export default function Menu() {
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
+              {session.user.isAdmin && (
+                <MenuItem onClick={handleClose}>
+                  <Link href="/admin/dashboard">Admin Dashboard</Link>
+                </MenuItem>
+              )}
               <MenuItem onClick={handleClose}>
                 <Link href="/order-history">Order History</Link>
               </MenuItem>

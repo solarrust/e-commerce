@@ -49,10 +49,10 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-const orderModel =
+const OrderModel =
   mongoose.models.Order || mongoose.model("Order", orderSchema);
 
-export default orderModel;
+export default OrderModel;
 
 export type Order = {
   _id: string;
