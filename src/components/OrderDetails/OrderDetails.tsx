@@ -2,12 +2,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
-// import { useSession } from "next-auth/react";
 import useSWR from "swr";
+import useSWRMutation from "swr/mutation";
 
 import { OrderItem } from "@/lib/models/OrderModel";
 import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 export default function OrderDetails({
@@ -17,7 +19,25 @@ export default function OrderDetails({
   orderId: string;
   paypalClientId: string;
 }) {
-  // const { data: session } = useSession();
+  const { trigger: deliverOrder, isMutating: isDelivering } = useSWRMutation(
+    `/api/orders/${orderId}`,
+    // eslint-disable-next-line
+    async (url) => {
+      const res = await fetch(`/api/admin/orders/${orderId}/deliver`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success("Order delivered successfully");
+      } else {
+        toast.error(data.message);
+      }
+    }
+  );
+  const { data: session } = useSession();
+
   const { data, error } = useSWR(`/api/orders/${orderId}`);
 
   async function createPaypalOrder() {
@@ -156,6 +176,16 @@ export default function OrderDetails({
             onApprove={onApprovePaypalOrder}
           />
         </PayPalScriptProvider>
+      )}
+      {session?.user.isAdmin && !isDelivered && (
+        <div>
+          <Button
+            onClick={() => deliverOrder()}
+            disabled={isDelivering}
+          >
+            {isDelivering ? "Delivering..." : "Mark as delivered"}
+          </Button>
+        </div>
       )}
     </div>
   );
