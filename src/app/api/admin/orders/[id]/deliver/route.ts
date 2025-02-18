@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { auth } from "@/lib/auth";
 import dbConnect from "@/lib/dbConnect";
 import OrderModel from "@/lib/models/OrderModel";
@@ -45,4 +46,4 @@ export const PUT = auth(async (...request) => {
       { status: 500 }
     );
   }
-});
+}) as any;
