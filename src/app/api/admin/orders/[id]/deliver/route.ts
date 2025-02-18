@@ -2,15 +2,20 @@
 import { auth } from "@/lib/auth";
 import dbConnect from "@/lib/dbConnect";
 import OrderModel from "@/lib/models/OrderModel";
+import { NextRequest } from "next/server";
 
-export const PUT = auth(async (...request) => {
-  const [req, { params }] = request;
+export async function PUT(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> }
+) {
+  const params = await props.params;
+  const session = await auth();
 
-  if (!req.auth) {
+  if (!session) {
     return Response.json({ message: "Not authorized" }, { status: 401 });
   }
 
-  if (!req.auth.user?.isAdmin) {
+  if (!session.user?.isAdmin) {
     return Response.json(
       { message: "Admin permission needed" },
       { status: 401 }
@@ -46,4 +51,4 @@ export const PUT = auth(async (...request) => {
       { status: 500 }
     );
   }
-}) as any;
+}
