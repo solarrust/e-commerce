@@ -1,14 +1,28 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { NextRequest } from "next/server";
+
 import { auth } from "@/lib/auth";
 import dbConnect from "@/lib/dbConnect";
 import ProductModel from "@/lib/models/ProductModel";
 
-export const DELETE = auth(async (...args: any) => {
-  const [req, { params }] = await args;
+export async function DELETE(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> }
+) {
+  const params = await props.params;
+  const session = await auth();
 
-  if (!req.auth || !req.auth.user?.isAdmin) {
+  if (!session) {
     return Response.json(
       { message: "unauthorized" },
+      {
+        status: 401,
+      }
+    );
+  }
+
+  if (!session.user?.isAdmin) {
+    return Response.json(
+      { message: "Admin permission needed" },
       {
         status: 401,
       }
@@ -29,12 +43,12 @@ export const DELETE = auth(async (...args: any) => {
         }
       );
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     return Response.json(
-      { message: err.message },
+      { message: (err as Error).message },
       {
         status: 500,
       }
     );
   }
-}) as any;
+}

@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { auth } from "@/lib/auth";
 import dbConnect from "@/lib/dbConnect";
 import OrderModel from "@/lib/models/OrderModel";
 
-export const GET = auth(async (req) => {
-  if (!req.auth) {
+export async function GET() {
+  const session = await auth();
+  if (!session) {
     return Response.json({ message: "Not authorized" }, { status: 401 });
   }
 
-  if (!req.auth.user?.isAdmin) {
+  if (!session.user?.isAdmin) {
     return Response.json(
       { message: "Admin permission needed" },
       { status: 401 }
@@ -21,4 +21,4 @@ export const GET = auth(async (req) => {
     .populate("user", "name");
 
   return Response.json(orders);
-}) as any;
+}

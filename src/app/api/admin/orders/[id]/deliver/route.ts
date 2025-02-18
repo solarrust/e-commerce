@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { NextRequest } from "next/server";
+
 import { auth } from "@/lib/auth";
 import dbConnect from "@/lib/dbConnect";
 import OrderModel from "@/lib/models/OrderModel";
-import { NextRequest } from "next/server";
 
 export async function PUT(
   request: NextRequest,
